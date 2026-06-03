@@ -1,0 +1,4 @@
+interface:
+  display_name: "SCI Manuscript Architect"
+  short_description: "Build field-styled SCI manuscripts"
+  default_prompt: "Use $sci-manuscript-architect to build a field-styled biomedical SCI manuscript from my study data, corpus profile, and target journal."
