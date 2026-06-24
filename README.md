@@ -1,82 +1,219 @@
+<div align="center">
+
 # SCI Manuscript Architect
 
-**SCI Manuscript Architect** is a Codex Skill for biomedical SCI manuscript
-strategy and writing. It helps researchers move from study materials to a
-field-positioned, evidence-bounded, journal-ready manuscript by combining
-biomedical literature positioning, motivation and innovation analysis,
-claim-to-evidence mapping, IMRAD planning, figure architecture, corpus-based
-style alignment, and pre-submission risk auditing.
+**Turn biomedical study materials into a field-positioned, evidence-bounded, submission-aware SCI manuscript.**
 
-**SCI Manuscript Architect** 是一个面向生物医学 SCI 论文的 Codex Skill。它不仅帮助写作，
-还会先判断项目在领域中的位置：当前研究进展、真实 motivation、knowledge gap、innovation
-类型、本项目贡献等级、证据强度和可冲击的投稿层级。
+中文 | English
 
-## Core Capabilities
+</div>
 
-- **Field Positioning**: scan field progress, recent papers, reviews,
-  high-impact work, guidelines, and target maturity.
-- **Motivation and Gap Lock**: distinguish real clinical unmet need,
-  biological mechanism gap, methods bottleneck, translational opportunity, and
-  weakly packaged gap.
-- **Innovation Taxonomy**: classify conceptual, mechanistic, methodological,
-  translational, resource, and integrative innovation.
-- **Contribution-Level Matrix**: judge whether the project is confirmatory,
-  incremental, a solid advance, field-shaping, or translationally important.
-- **Submission-Level Estimator**: estimate whether the work fits a
-  top/high-impact, solid specialty, method/resource, or descriptive/lower-level
-  journal strategy.
-- **Evidence Ledger**: map each major claim to user data, figures, statistics,
-  citations, guidelines, or missing evidence.
-- **Citation Support Bank**: build claim-specific literature support instead of
-  stacking generic citations.
-- **IMRAD Blueprint**: design Introduction, Methods, Results, and Discussion
-  before prose drafting.
-- **Figure Architecture**: plan study design figures, workflows, mechanistic
-  models, main finding panels, validation figures, and graphical abstracts.
-- **Reviewer and Journal-Ready Audit**: run severity-ranked pre-submission
-  checks, reporting-guideline checks, and LaTeX-safe manuscript checks.
+## Why This Exists
 
-## 核心能力
+Many biomedical manuscripts do not fail because the data are useless. They fail
+because the project is not positioned clearly enough:
 
-- **领域定位**：扫描领域进展、近期论文、综述、高影响力工作、指南和靶点成熟度。
-- **Motivation 与 Gap 锁定**：区分真实临床未满足需求、机制空白、方法瓶颈、转化机会和包装型 gap。
-- **创新性分类**：判断 conceptual、mechanistic、methodological、translational、resource、integrative innovation。
-- **贡献等级矩阵**：判断项目属于验证性、增量推进、扎实进展、领域塑形，还是有转化重要性。
-- **投稿等级估计**：评估项目适合 top/high-impact、solid specialty、method/resource，还是 descriptive/lower-level 投稿策略。
-- **证据台账**：把每个关键 claim 绑定到数据、图表、统计、文献、指南或缺失证据。
-- **引用支持库**：让 citation 服务于具体 claim，而不是简单堆文献。
-- **IMRAD 蓝图**：在写正文前设计 Introduction、Methods、Results、Discussion。
-- **图表架构**：规划研究设计图、流程图、机制模型图、核心结果图、验证图和 graphical abstract。
-- **投稿前审计**：进行分级风险审查、报告指南检查和 LaTeX 安全检查。
+- the motivation sounds important but is not anchored in the current field;
+- the novelty is asserted before recent papers, guidelines, or target maturity
+  are checked;
+- the central claim is stronger than the evidence;
+- figures show analyses but do not carry the manuscript's argument;
+- the paper is written before anyone decides what journal level it can
+  realistically target.
 
-## What It Borrows
+**SCI Manuscript Architect** is a Codex Skill for this last-mile problem in
+biomedical SCI writing. It helps researchers move from experiment notes,
+figures, result summaries, references, protocols, omics outputs, and partial
+drafts to a manuscript strategy that is field-aware, evidence-bounded, and
+journal-facing.
+
+**SCI Manuscript Architect** 面向生物医学 SCI 论文的“最后一公里”：不是先急着写正文，而是先判断项目在领域中的位置、真实动机、创新类型、证据强度、贡献等级和可尝试的投稿层级。它帮助研究者把实验材料、图表、结果摘要、参考文献、实验方案、组学分析和半成稿，转化为一套可写、可审、可投稿的论文架构。
+
+## Design Philosophy
+
+This skill has three layers:
+
+| Layer | What it answers | Main outputs |
+|---|---|---|
+| **Field Strategy** | Is the project worth writing, and what level can it target? | Field Scan Report, Motivation and Gap Lock, Innovation and Contribution Matrix, Submission-Level Estimate |
+| **Evidence Architecture** | What can the paper safely claim? | PaperSpine Map, Evidence Ledger, Citation Support Bank, claim-boundary labels |
+| **Manuscript Execution** | How should the paper be written, visualized, and audited? | IMRAD Blueprint, Introduction Flowchart, Figure Architecture Plan, Language Guard, Reviewer Audit |
+
+The goal is not to make AI write a paper for the researcher. The goal is to make
+the researcher's judgment explicit, checkable, and manuscript-ready.
+
+## What It Can Do
+
+### 1. Field Positioning
+
+Map the project against the current biomedical field:
+
+- recent PubMed/PMC literature;
+- high-impact or highly cited papers;
+- iCite metrics such as RCR, APT, and citation count;
+- MeSH/BioPortal concept normalization;
+- clinical guidelines and unmet clinical needs;
+- target maturity, druggability, and translational relevance through resources
+  such as Pharos and TargetMine.
+
+If no database or web scan is performed, novelty and submission-level judgments
+must be marked as `FIELD_SCAN_REQUIRED`.
+
+### 2. Motivation and Gap Lock
+
+Separate real motivation from decorative framing:
+
+- clinical unmet need;
+- biological mechanism gap;
+- methodological bottleneck;
+- translational opportunity;
+- resource or atlas gap;
+- over-packaged gap that the data cannot actually answer.
+
+### 3. Innovation Taxonomy
+
+Classify what kind of innovation the study can credibly claim:
+
+- conceptual innovation;
+- mechanistic innovation;
+- methodological innovation;
+- translational innovation;
+- resource innovation;
+- integrative multi-modal innovation.
+
+### 4. Contribution-Level Matrix
+
+Estimate whether the project is:
+
+- confirmatory;
+- incremental;
+- a solid biomedical advance;
+- field-shaping;
+- translationally important.
+
+The matrix also states why the work is not one level higher and what evidence
+would be needed to upgrade it.
+
+### 5. Submission-Level Estimator
+
+Provide a strategic journal-tier estimate:
+
+- `Top/high-impact`;
+- `solid specialty`;
+- `method/resource`;
+- `descriptive/lower-level`.
+
+Every estimate must include evidence basis, rejection risks, upgrade path, and
+risk labels such as `FIELD_SCAN_REQUIRED`, `EVIDENCE_INCOMPLETE`,
+`VALIDATION_REQUIRED`, and `CLAIM_OVERREACH_RISK`.
+
+### 6. Evidence-Bounded Manuscript Building
+
+Before drafting prose, the skill builds:
+
+- PaperSpine Map;
+- Evidence Ledger;
+- Citation Support Bank;
+- biomedical Introduction Flowchart;
+- IMRAD Blueprint;
+- Figure Architecture Plan;
+- Writing Rationale Matrix;
+- Language Guard;
+- Reviewer and Journal-Ready Audit.
+
+## Borrowed Strengths
 
 ### From Supervisor-Skills
 
-This skill borrows structure, not disciplinary assumptions:
+This project borrows **structure**, not disciplinary assumptions, from
+[HKUSTDial/Supervisor-Skills](https://github.com/HKUSTDial/Supervisor-Skills):
 
-- `intro-drafter` -> biomedical six-part Introduction flowchart.
-- `tech-paper-template` -> background-gap-objective-design-evidence-contribution
-  self-consistency chain.
-- `figure-designer` -> figure architecture and figure-quality gates.
-- `pre-submission-reviewer` -> `CRITICAL / MAJOR / MINOR` severity audit.
-- `benchmark-paper-template` -> only for dataset, resource, tool, benchmark, or
-  model-comparison papers.
+- Introduction flowchart -> biomedical six-part Introduction;
+- technical-paper skeleton -> biomedical background-gap-objective-design-evidence-contribution chain;
+- figure designer -> study design, workflow, mechanism, main result, and validation figure architecture;
+- pre-submission reviewer -> `CRITICAL / MAJOR / MINOR` audit taxonomy;
+- benchmark-paper template -> used only for dataset, resource, tool, benchmark,
+  or model-comparison manuscripts.
 
 ### From ToolUniverse
 
-ToolUniverse is used as an external field-coordinate layer:
+ToolUniverse is treated as an **external field-coordinate system**:
 
-- PubMed/PMC for field progress and recent literature.
-- iCite for citation count, RCR, APT, NIH percentile, and translational
-  potential.
-- MeSH/BioPortal for biomedical concept normalization.
-- PubMed Guidelines/TRIP Database for clinical guidelines and unmet need.
-- Pharos/TargetMine for target maturity, druggability, disease associations,
-  and translational relevance.
+- PubMed/PMC: field progress and recent literature;
+- iCite: citation count, RCR, APT, NIH percentile, translational signal;
+- MeSH/BioPortal: biomedical concept normalization;
+- guideline tools: clinical unmet need and practice context;
+- Pharos/TargetMine: target maturity, disease association, and translational relevance.
 
-ToolUniverse findings support positioning, motivation, and journal strategy.
-They do not create user findings.
+ToolUniverse can support motivation, field positioning, and journal strategy. It
+cannot invent findings for the user's study.
+
+## Standard Workflow
+
+```text
+Project Intake
+-> Field Scan
+-> Motivation, Gap, and Innovation Lock
+-> Contribution-Level Matrix
+-> Submission-Level Estimate
+-> Evidence and Claim Architecture
+-> IMRAD and Figure Narrative Design
+-> Language and Corpus Alignment
+-> Drafting
+-> Submission-Level Audit
+```
+
+## Quick Start
+
+### Field scan and submission strategy
+
+```text
+Use $sci-manuscript-architect to perform a ToolUniverse-backed field scan for my biomedical project, then estimate motivation strength, innovation type, contribution level, and realistic submission tier.
+```
+
+### Offline provisional judgment
+
+```text
+Use $sci-manuscript-architect to judge this project from my materials only. Do not browse or use databases. Mark novelty and submission-level judgments with FIELD_SCAN_REQUIRED.
+```
+
+### Motivation and innovation matrix
+
+```text
+Use $sci-manuscript-architect to create a Motivation and Gap Lock plus an Innovation and Contribution Matrix for this biomedical study.
+```
+
+### Manuscript architecture before drafting
+
+```text
+Use $sci-manuscript-architect to build the Evidence Ledger, Citation Support Bank, biomedical Introduction Flowchart, IMRAD Blueprint, and Figure Architecture Plan before drafting the manuscript.
+```
+
+## 中文快速开始
+
+### 领域扫描和投稿策略
+
+```text
+使用 $sci-manuscript-architect，结合 ToolUniverse 对我的生物医学项目做 field scan，然后评估 motivation、innovation、contribution level 和可尝试的投稿层级。
+```
+
+### 离线初判
+
+```text
+使用 $sci-manuscript-architect，只基于我提供的材料做初步判断，不联网、不查数据库。请把创新性和投稿等级判断标记为 FIELD_SCAN_REQUIRED。
+```
+
+### Motivation 和创新性矩阵
+
+```text
+使用 $sci-manuscript-architect，为这个生物医学研究生成 Motivation and Gap Lock 以及 Innovation and Contribution Matrix。
+```
+
+### 先搭论文架构，再写正文
+
+```text
+使用 $sci-manuscript-architect，先生成 Evidence Ledger、Citation Support Bank、biomedical Introduction Flowchart、IMRAD Blueprint 和 Figure Architecture Plan，再开始写正文。
+```
 
 ## Installation
 
@@ -88,85 +225,19 @@ python C:\Users\lstsw\.codex\skills\.system\skill-installer\scripts\install-skil
 
 Then restart Codex so the new skill is picked up by the skill index.
 
-## 安装方式
-
-使用 Codex 的 skill installer：
-
-```powershell
-python C:\Users\lstsw\.codex\skills\.system\skill-installer\scripts\install-skill-from-github.py --repo Liangshuntao/sci-manuscript-architect --path . --name sci-manuscript-architect
-```
-
-安装后重启 Codex，让 skill 进入索引。
-
-## Quick Start
-
-### Field scan and submission-level estimate
+## Repository Structure
 
 ```text
-Use $sci-manuscript-architect to perform a ToolUniverse-backed field scan for my project, then estimate motivation strength, innovation type, contribution level, and realistic submission tier.
+.
+|-- SKILL.md                  # Executable skill specification
+|-- references/               # On-demand strategy and writing guides
+|-- templates/                # Structured output templates
+|-- scripts/                  # Optional corpus helper scripts
+|-- agents/
+|   `-- openai.yaml
+|-- README.md
+`-- LICENSE
 ```
-
-### Provisional offline judgment
-
-```text
-Use $sci-manuscript-architect to judge this project from my materials only. Do not browse or use databases. Mark novelty and submission-level judgments with FIELD_SCAN_REQUIRED.
-```
-
-### Motivation, innovation, and contribution matrix
-
-```text
-Use $sci-manuscript-architect to create a Motivation and Gap Lock plus an Innovation and Contribution Matrix for this biomedical study.
-```
-
-### Manuscript drafting after evidence lock
-
-```text
-Use $sci-manuscript-architect to build the Evidence Ledger, Citation Support Bank, biomedical Introduction Flowchart, IMRAD Blueprint, and Figure Architecture Plan before drafting the manuscript.
-```
-
-## 快速开始
-
-### 领域扫描和投稿等级预估
-
-```text
-使用 $sci-manuscript-architect，结合 ToolUniverse 对我的项目做 field scan，然后评估 motivation、innovation、contribution level 和可尝试的投稿层级。
-```
-
-### 离线初判
-
-```text
-使用 $sci-manuscript-architect，只基于我提供的材料做初步判断，不联网、不查数据库。请把创新性和投稿等级判断标记为 FIELD_SCAN_REQUIRED。
-```
-
-### Motivation、Innovation 和 Contribution 矩阵
-
-```text
-使用 $sci-manuscript-architect，为这个生物医学研究生成 Motivation and Gap Lock 以及 Innovation and Contribution Matrix。
-```
-
-### 锁定证据后再写稿
-
-```text
-使用 $sci-manuscript-architect，先生成 Evidence Ledger、Citation Support Bank、biomedical Introduction Flowchart、IMRAD Blueprint 和 Figure Architecture Plan，再开始写正文。
-```
-
-## Standard Workflow
-
-1. Project Intake and Field Scan
-2. Motivation, Gap, and Innovation Lock
-3. Evidence and Claim Architecture
-4. IMRAD and Figure Narrative Design
-5. Language and Corpus Alignment
-6. Drafting and Submission-Level Audit
-
-## 标准工作流
-
-1. 项目启动与领域扫描
-2. Motivation、Gap 与 Innovation 锁定
-3. 证据与 Claim 架构
-4. IMRAD 与图表叙事设计
-5. 语言与领域语料对齐
-6. 正文写作与投稿等级审计
 
 ## Corpus Intelligence
 
@@ -175,15 +246,13 @@ extract field terminology and phrase patterns, and build a journal style
 profile. It helps the manuscript sound like work from the same biomedical field
 without copying protected text.
 
-Helper scripts:
-
 ```powershell
 python scripts\collect_corpus.py --query "macrophage myocardial injury" --source both --max-results 50 --since-year 2023 --output-dir corpus_workspace
 python scripts\extract_terms.py --input corpus_workspace\corpus_metadata.jsonl --output-dir corpus_workspace
 python scripts\build_style_profile.py --corpus-dir corpus_workspace
 ```
 
-Generated artifacts:
+Generated artifacts include:
 
 - `corpus_metadata.jsonl`
 - `corpus_index.md`
@@ -194,36 +263,22 @@ Generated artifacts:
 
 ## Safety Boundaries
 
-- The skill does not fabricate experiments, sample sizes, p-values, citations,
-  datasets, figures, ethics approvals, guidelines, or clinical claims.
+- Do not fabricate experiments, sample sizes, p-values, citations, datasets,
+  figures, ethics approvals, guidelines, or clinical claims.
 - User materials are authoritative for study results.
-- Field scan outputs support positioning, background, gap, and journal strategy;
-  they do not support invented findings.
+- Field scans support positioning, background, gap, and journal strategy; they
+  do not support invented findings.
 - Corpus papers provide terminology and style evidence, not evidence for the
   user's findings.
 - Missing evidence is marked as `MISSING`.
 - Unverified citations are marked as `VERIFY`.
 - Overbroad claims are marked as `OVERCLAIM`.
-- If no field scan has been performed, novelty and submission-level judgments
-  are marked as `FIELD_SCAN_REQUIRED`.
+- No field scan means novelty and submission-level judgments are provisional
+  and must be marked as `FIELD_SCAN_REQUIRED`.
 - Submission-level estimates are strategic guidance, not acceptance
   predictions.
 - Final manuscript prose should be original, evidence-bounded, and not copied
   from corpus papers.
-
-## Repository Structure
-
-```text
-.
-|-- SKILL.md
-|-- agents/
-|   `-- openai.yaml
-|-- references/
-|-- templates/
-|-- scripts/
-|-- README.md
-`-- LICENSE
-```
 
 ## License
 
