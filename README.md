@@ -1,30 +1,82 @@
 # SCI Manuscript Architect
 
-**SCI Manuscript Architect** is a Codex Skill for building biomedical SCI manuscripts from study materials. It combines motivation-driven paper architecture, evidence-aware claim control, corpus-based terminology/style profiling, reviewer-risk auditing, and journal-readiness checks.
+**SCI Manuscript Architect** is a Codex Skill for biomedical SCI manuscript
+strategy and writing. It helps researchers move from study materials to a
+field-positioned, evidence-bounded, journal-ready manuscript by combining
+biomedical literature positioning, motivation and innovation analysis,
+claim-to-evidence mapping, IMRAD planning, figure architecture, corpus-based
+style alignment, and pre-submission risk auditing.
 
-**SCI Manuscript Architect** 是一个用于生物医学 SCI 论文写作的 Codex Skill。它面向“从实验材料到可投稿论文”的完整流程，结合中心论证构建、证据台账、领域语料库风格画像、审稿风险审计和投稿前检查。
+**SCI Manuscript Architect** 是一个面向生物医学 SCI 论文的 Codex Skill。它不仅帮助写作，
+还会先判断项目在领域中的位置：当前研究进展、真实 motivation、knowledge gap、innovation
+类型、本项目贡献等级、证据强度和可冲击的投稿层级。
 
-## What It Does
+## Core Capabilities
 
-- Builds manuscripts from experiment notes, figures, results, protocols, references, PDFs, and partial drafts.
-- Locks the central motivation before drafting.
-- Creates a PaperSpine Map for research gap, central claim, novelty, main finding, and take-home message.
-- Maps every key claim to data, figures, statistics, citations, or missing evidence through an Evidence Ledger.
-- Builds a Citation Support Bank for claim-specific literature support.
-- Generates IMRAD blueprints and Writing Rationale Matrices before prose drafting.
-- Uses a Corpus Intelligence Layer to align terminology, phrase patterns, hedging, and journal style with papers in the same biomedical field.
-- Runs Reviewer Audit and Journal-Ready Audit before finalization.
+- **Field Positioning**: scan field progress, recent papers, reviews,
+  high-impact work, guidelines, and target maturity.
+- **Motivation and Gap Lock**: distinguish real clinical unmet need,
+  biological mechanism gap, methods bottleneck, translational opportunity, and
+  weakly packaged gap.
+- **Innovation Taxonomy**: classify conceptual, mechanistic, methodological,
+  translational, resource, and integrative innovation.
+- **Contribution-Level Matrix**: judge whether the project is confirmatory,
+  incremental, a solid advance, field-shaping, or translationally important.
+- **Submission-Level Estimator**: estimate whether the work fits a
+  top/high-impact, solid specialty, method/resource, or descriptive/lower-level
+  journal strategy.
+- **Evidence Ledger**: map each major claim to user data, figures, statistics,
+  citations, guidelines, or missing evidence.
+- **Citation Support Bank**: build claim-specific literature support instead of
+  stacking generic citations.
+- **IMRAD Blueprint**: design Introduction, Methods, Results, and Discussion
+  before prose drafting.
+- **Figure Architecture**: plan study design figures, workflows, mechanistic
+  models, main finding panels, validation figures, and graphical abstracts.
+- **Reviewer and Journal-Ready Audit**: run severity-ranked pre-submission
+  checks, reporting-guideline checks, and LaTeX-safe manuscript checks.
 
-## 核心功能
+## 核心能力
 
-- 根据实验记录、图表、结果摘要、实验方案、参考文献、PDF 和局部初稿构建 SCI 论文。
-- 在写正文前先锁定论文的 central motivation。
-- 生成 PaperSpine Map，明确 research gap、central claim、novelty、main finding 和 take-home message。
-- 通过 Evidence Ledger 将每个关键论断绑定到数据、图表、统计、文献或缺失证据。
-- 建立 Citation Support Bank，让引用服务于具体 claim，而不是简单堆文献。
-- 在正式写作前生成 IMRAD Blueprint 和 Writing Rationale Matrix。
-- 通过 Corpus Intelligence Layer 积累领域术语、常见搭配、谨慎表达和期刊风格画像。
-- 在定稿前执行 Reviewer Audit 和 Journal-Ready Audit。
+- **领域定位**：扫描领域进展、近期论文、综述、高影响力工作、指南和靶点成熟度。
+- **Motivation 与 Gap 锁定**：区分真实临床未满足需求、机制空白、方法瓶颈、转化机会和包装型 gap。
+- **创新性分类**：判断 conceptual、mechanistic、methodological、translational、resource、integrative innovation。
+- **贡献等级矩阵**：判断项目属于验证性、增量推进、扎实进展、领域塑形，还是有转化重要性。
+- **投稿等级估计**：评估项目适合 top/high-impact、solid specialty、method/resource，还是 descriptive/lower-level 投稿策略。
+- **证据台账**：把每个关键 claim 绑定到数据、图表、统计、文献、指南或缺失证据。
+- **引用支持库**：让 citation 服务于具体 claim，而不是简单堆文献。
+- **IMRAD 蓝图**：在写正文前设计 Introduction、Methods、Results、Discussion。
+- **图表架构**：规划研究设计图、流程图、机制模型图、核心结果图、验证图和 graphical abstract。
+- **投稿前审计**：进行分级风险审查、报告指南检查和 LaTeX 安全检查。
+
+## What It Borrows
+
+### From Supervisor-Skills
+
+This skill borrows structure, not disciplinary assumptions:
+
+- `intro-drafter` -> biomedical six-part Introduction flowchart.
+- `tech-paper-template` -> background-gap-objective-design-evidence-contribution
+  self-consistency chain.
+- `figure-designer` -> figure architecture and figure-quality gates.
+- `pre-submission-reviewer` -> `CRITICAL / MAJOR / MINOR` severity audit.
+- `benchmark-paper-template` -> only for dataset, resource, tool, benchmark, or
+  model-comparison papers.
+
+### From ToolUniverse
+
+ToolUniverse is used as an external field-coordinate layer:
+
+- PubMed/PMC for field progress and recent literature.
+- iCite for citation count, RCR, APT, NIH percentile, and translational
+  potential.
+- MeSH/BioPortal for biomedical concept normalization.
+- PubMed Guidelines/TRIP Database for clinical guidelines and unmet need.
+- Pharos/TargetMine for target maturity, druggability, disease associations,
+  and translational relevance.
+
+ToolUniverse findings support positioning, motivation, and journal strategy.
+They do not create user findings.
 
 ## Installation
 
@@ -34,95 +86,94 @@ Use Codex's skill installer:
 python C:\Users\lstsw\.codex\skills\.system\skill-installer\scripts\install-skill-from-github.py --repo Liangshuntao/sci-manuscript-architect --path . --name sci-manuscript-architect
 ```
 
-Then restart Codex so the new Skill is picked up by the skill index.
+Then restart Codex so the new skill is picked up by the skill index.
 
 ## 安装方式
 
-使用 Codex 的 Skill 安装脚本：
+使用 Codex 的 skill installer：
 
 ```powershell
 python C:\Users\lstsw\.codex\skills\.system\skill-installer\scripts\install-skill-from-github.py --repo Liangshuntao/sci-manuscript-architect --path . --name sci-manuscript-architect
 ```
 
-安装后请重启 Codex，让新的 Skill 进入技能索引。
+安装后重启 Codex，让 skill 进入索引。
 
 ## Quick Start
 
-Invoke the Skill explicitly:
+### Field scan and submission-level estimate
 
 ```text
-Use $sci-manuscript-architect to build a biomedical SCI manuscript from my study data, corpus profile, and target journal.
+Use $sci-manuscript-architect to perform a ToolUniverse-backed field scan for my project, then estimate motivation strength, innovation type, contribution level, and realistic submission tier.
 ```
 
-For a staged workflow:
+### Provisional offline judgment
 
 ```text
-Use $sci-manuscript-architect to first create a Project Intake, Motivation Lock, PaperSpine Map, and Evidence Ledger. Do not draft the full manuscript yet.
+Use $sci-manuscript-architect to judge this project from my materials only. Do not browse or use databases. Mark novelty and submission-level judgments with FIELD_SCAN_REQUIRED.
 ```
 
-For corpus-driven style alignment:
+### Motivation, innovation, and contribution matrix
 
 ```text
-Use $sci-manuscript-architect to build a corpus profile for macrophage myocardial injury, generate a term bank, phrase pattern bank, journal style profile, and language guard, then draft the Introduction.
+Use $sci-manuscript-architect to create a Motivation and Gap Lock plus an Innovation and Contribution Matrix for this biomedical study.
+```
+
+### Manuscript drafting after evidence lock
+
+```text
+Use $sci-manuscript-architect to build the Evidence Ledger, Citation Support Bank, biomedical Introduction Flowchart, IMRAD Blueprint, and Figure Architecture Plan before drafting the manuscript.
 ```
 
 ## 快速开始
 
-显式调用该 Skill：
+### 领域扫描和投稿等级预估
 
 ```text
-用 $sci-manuscript-architect 根据我的研究数据、语料库画像和目标期刊，构建一篇生物医学 SCI 论文。
+使用 $sci-manuscript-architect，结合 ToolUniverse 对我的项目做 field scan，然后评估 motivation、innovation、contribution level 和可尝试的投稿层级。
 ```
 
-建议分阶段启动：
+### 离线初判
 
 ```text
-用 $sci-manuscript-architect 先生成 Project Intake、Motivation Lock、PaperSpine Map 和 Evidence Ledger。暂时不要直接写全文。
+使用 $sci-manuscript-architect，只基于我提供的材料做初步判断，不联网、不查数据库。请把创新性和投稿等级判断标记为 FIELD_SCAN_REQUIRED。
 ```
 
-如果需要领域语料库风格对齐：
+### Motivation、Innovation 和 Contribution 矩阵
 
 ```text
-用 $sci-manuscript-architect 为 macrophage myocardial injury 方向建立语料库画像，生成 term bank、phrase pattern bank、journal style profile 和 language guard，然后再写 Introduction。
+使用 $sci-manuscript-architect，为这个生物医学研究生成 Motivation and Gap Lock 以及 Innovation and Contribution Matrix。
+```
+
+### 锁定证据后再写稿
+
+```text
+使用 $sci-manuscript-architect，先生成 Evidence Ledger、Citation Support Bank、biomedical Introduction Flowchart、IMRAD Blueprint 和 Figure Architecture Plan，再开始写正文。
 ```
 
 ## Standard Workflow
 
-1. Project Intake
-2. Materials and Source Inventory
-3. Corpus Intelligence Setup
-4. Exemplar and Target Journal Scan
-5. Motivation Lock
-6. PaperSpine Map
-7. Evidence Ledger
-8. Citation Support Bank
-9. IMRAD Blueprint
-10. Writing Rationale Matrix
-11. Language Guard
-12. English Section Drafting
-13. Reviewer Audit
-14. Journal-Ready and LaTeX-Safe Audit
+1. Project Intake and Field Scan
+2. Motivation, Gap, and Innovation Lock
+3. Evidence and Claim Architecture
+4. IMRAD and Figure Narrative Design
+5. Language and Corpus Alignment
+6. Drafting and Submission-Level Audit
 
 ## 标准工作流
 
-1. 项目启动信息收集
-2. 材料与来源清单
-3. 领域语料库设置
-4. 高水平论文与目标期刊扫描
-5. 中心动机锁定
-6. PaperSpine 主线图
-7. 证据台账
-8. 引用支持库
-9. IMRAD 蓝图
-10. 写作理由矩阵
-11. 语言守门检查
-12. 英文段落写作
-13. 审稿人风险审计
-14. 投稿前与 LaTeX 安全检查
+1. 项目启动与领域扫描
+2. Motivation、Gap 与 Innovation 锁定
+3. 证据与 Claim 架构
+4. IMRAD 与图表叙事设计
+5. 语言与领域语料对齐
+6. 正文写作与投稿等级审计
 
 ## Corpus Intelligence
 
-The corpus layer can collect public metadata and abstracts from PubMed/OpenAlex, extract field terminology and phrase patterns, and build a journal style profile. It is designed to help the manuscript sound like work from the same biomedical field without copying protected text.
+The corpus layer can collect public metadata and abstracts from PubMed/OpenAlex,
+extract field terminology and phrase patterns, and build a journal style
+profile. It helps the manuscript sound like work from the same biomedical field
+without copying protected text.
 
 Helper scripts:
 
@@ -141,77 +192,39 @@ Generated artifacts:
 - `journal_style_profile.md`
 - `language_guard.md`
 
-## 语料库智能层
-
-语料库层可以从 PubMed/OpenAlex 收集公开元数据和摘要，抽取领域术语与表达模式，并生成期刊风格画像。它的目标是帮助论文语言更接近同领域 SCI 论文，而不是复制受版权保护的原文。
-
-辅助脚本：
-
-```powershell
-python scripts\collect_corpus.py --query "macrophage myocardial injury" --source both --max-results 50 --since-year 2023 --output-dir corpus_workspace
-python scripts\extract_terms.py --input corpus_workspace\corpus_metadata.jsonl --output-dir corpus_workspace
-python scripts\build_style_profile.py --corpus-dir corpus_workspace
-```
-
-生成文件：
-
-- `corpus_metadata.jsonl`
-- `corpus_index.md`
-- `term_bank.md`
-- `phrase_pattern_bank.md`
-- `journal_style_profile.md`
-- `language_guard.md`
-
 ## Safety Boundaries
 
-- The Skill does not fabricate experiments, sample sizes, p-values, citations, datasets, figures, ethics approvals, or clinical claims.
+- The skill does not fabricate experiments, sample sizes, p-values, citations,
+  datasets, figures, ethics approvals, guidelines, or clinical claims.
 - User materials are authoritative for study results.
-- Corpus papers provide terminology and style evidence, not evidence for the user's findings.
+- Field scan outputs support positioning, background, gap, and journal strategy;
+  they do not support invented findings.
+- Corpus papers provide terminology and style evidence, not evidence for the
+  user's findings.
 - Missing evidence is marked as `MISSING`.
 - Unverified citations are marked as `VERIFY`.
 - Overbroad claims are marked as `OVERCLAIM`.
-- Final manuscript prose should be original, evidence-bounded, and not copied from corpus papers.
-
-## 安全边界
-
-- 不虚构实验、样本量、p 值、引用、数据集、图表、伦理审批或临床结论。
-- 用户提供的材料是研究结果的权威来源。
-- 语料库论文只用于术语和风格参考，不能替代用户自己的证据。
-- 缺失证据标记为 `MISSING`。
-- 未验证引用标记为 `VERIFY`。
-- 过度延展的论断标记为 `OVERCLAIM`。
-- 最终英文正文应为原创、证据边界清楚，不能复制语料库论文句子。
+- If no field scan has been performed, novelty and submission-level judgments
+  are marked as `FIELD_SCAN_REQUIRED`.
+- Submission-level estimates are strategic guidance, not acceptance
+  predictions.
+- Final manuscript prose should be original, evidence-bounded, and not copied
+  from corpus papers.
 
 ## Repository Structure
 
 ```text
 .
-├── SKILL.md
-├── agents/
-│   └── openai.yaml
-├── references/
-├── templates/
-├── scripts/
-└── LICENSE
-```
-
-## 目录结构
-
-```text
-.
-├── SKILL.md
-├── agents/
-│   └── openai.yaml
-├── references/
-├── templates/
-├── scripts/
-└── LICENSE
+|-- SKILL.md
+|-- agents/
+|   `-- openai.yaml
+|-- references/
+|-- templates/
+|-- scripts/
+|-- README.md
+`-- LICENSE
 ```
 
 ## License
 
 MIT License.
-
-## 许可证
-
-MIT License。
