@@ -15,10 +15,14 @@ try {
 
     git -C $repo add -A
     git -C $repo diff --cached --quiet
+    $diffExitCode = $LASTEXITCODE
 
-    if ($LASTEXITCODE -eq 0) {
+    if ($diffExitCode -eq 0) {
         Write-Output "No staged changes to sync."
         exit 0
+    }
+    if ($diffExitCode -ne 1) {
+        throw "git diff failed with exit code $diffExitCode"
     }
 
     $messageTime = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
