@@ -10,6 +10,8 @@ corpus_workspace/
 paper_rewriting_output/
 *.tmp
 *.log
+*.bak*
+.sync-logs/
 
 .DS_Store
 Thumbs.db
