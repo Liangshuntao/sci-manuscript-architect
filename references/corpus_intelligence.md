@@ -65,6 +65,49 @@ Prefer papers that match:
 - High relevance over journal prestige alone.
 - Article type matching the user's manuscript when possible.
 
+
+## Context-Aware Narrative Learning
+
+When the user's goal is to learn from top-journal or high-impact papers, corpus
+intelligence must go beyond terminology extraction. Build a narrative-learning
+layer that records the **usage environment** of each source:
+
+- journal or venue role;
+- article type, such as review, clinical cohort, mechanistic experiment,
+  metabolism/omics study, or single-cell/spatial atlas;
+- evidence environment and assay context;
+- abstract or section move profile when public metadata supports it;
+- claim-strength context, including what the source can and cannot support;
+- manuscript placement, such as Introduction, Results, Discussion, limitations,
+  or future validation.
+
+Recommended narrative-learning structure:
+
+```text
+narrative_learning/
+  README.md
+  01_online_context_engine/
+    journal_narrative_playbook.md
+    evidence_environment_map.md
+    online_source_context_matrix.md
+    section_move_library.md
+    non_native_scientific_narrative_training.md
+    from_corpus_to_narrative_architecture.md
+  02_manuscript_specific_tools/
+    storyline_rewrite_rules.md
+    imrad_blueprint.md
+    writing_rationale_matrix.md
+    reviewer_audit_bank.md
+    limitation_hedging_patterns.md
+  03_general_move_library/
+  legacy_first_pass/
+```
+
+Narrative-learning outputs should answer: "Why can this source speak this way,
+where does that move belong, and is the user's evidence strong enough to borrow
+that claim strength?" This prevents non-native writers from copying surface
+phrasing while missing the evidentiary logic that makes high-impact prose work.
+
 ## Output Rules
 
 Corpus-derived guidance should produce:
@@ -77,3 +120,4 @@ Corpus-derived guidance should produce:
 - Journal style profile.
 
 Do not produce sentence templates that are near-copies of source papers.
+

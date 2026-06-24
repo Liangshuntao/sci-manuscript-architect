@@ -1,7 +1,6 @@
 ---
 name: sci-manuscript-architect
 description: Use for biomedical SCI manuscript writing from study materials, including motivation-driven paper architecture, field corpus tracking, terminology/style profiling, IMRAD blueprinting, Evidence Ledger, Citation Support Bank, reviewer audit, journal checklist, and LaTeX-safe manuscript checks.
-license: MIT
 ---
 
 # SCI Manuscript Architect
@@ -29,7 +28,8 @@ Default language policy:
 - Preparing English manuscript prose while keeping Chinese reasoning visible to
   the user.
 - Building or using a field corpus to align terminology, collocations, hedging,
-  and journal style with high-quality papers in the same biomedical field.
+  journal style, and context-aware narrative logic with high-quality papers in
+  the same biomedical field.
 
 ## Operating Rules
 
@@ -65,33 +65,38 @@ Follow this order unless the user requests a specific artifact:
    or when enough topic information is available, create or update a corpus
    profile using public metadata, abstracts, user-provided references, and
    open-license full text only. Read `references/corpus_intelligence.md`.
-4. **Exemplar and Target Journal Scan**: learn structure, tone, figure logic,
+4. **Context-Aware Narrative Learning**: when the user wants to learn from
+   top-journal or high-impact papers, go beyond term extraction. Classify the
+   source-use environment, evidence type, article type, section function, and
+   allowable claim strength before adapting narrative moves. Treat corpus papers
+   as source-context examples, not sentence templates.
+5. **Exemplar and Target Journal Scan**: learn structure, tone, figure logic,
    and key constraints from user-provided examples, target journal instructions,
    or high-quality papers. Do not copy scientific claims.
-5. **Motivation Lock**: generate and confirm one central motivation before
+6. **Motivation Lock**: generate and confirm one central motivation before
    drafting. Read `references/motivation_lock.md`.
-6. **PaperSpine Map**: define research gap, central claim, main finding,
+7. **PaperSpine Map**: define research gap, central claim, main finding,
    novelty, and take-home message. Read `references/paper_spine_map.md`.
-7. **Evidence Ledger**: map every major claim to data, figure, statistic,
+8. **Evidence Ledger**: map every major claim to data, figure, statistic,
    citation, or missing evidence. Read `references/evidence_ledger.md`.
-8. **Citation Support Bank**: build claim-specific citation candidates for
+9. **Citation Support Bank**: build claim-specific citation candidates for
    Introduction, Discussion, limitations, and application claims. Read
    `references/citation_support_bank.md`.
-9. **IMRAD Blueprint**: create paragraph-level functions for Introduction,
+10. **IMRAD Blueprint**: create paragraph-level functions for Introduction,
    Methods, Results, and Discussion. Use `templates/manuscript_blueprint.md`.
-10. **Writing Rationale Matrix**: plan each writing unit before prose. Read
+11. **Writing Rationale Matrix**: plan each writing unit before prose. Read
    `references/writing_rationale_matrix.md` and use
    `templates/writing_rationale_matrix.md`.
-11. **Language Guard**: apply the corpus-derived terminology bank, phrase
+12. **Language Guard**: apply the corpus-derived terminology bank, phrase
     pattern bank, and journal style profile before final prose. Read
     `references/terminology_and_style.md`.
-12. **English Section Drafting**: write English paragraphs from the approved
+13. **English Section Drafting**: write English paragraphs from the approved
     blueprint, evidence ledger, and language guard. Do not exceed evidence
     strength.
-13. **Reviewer Audit**: simulate critical peer review and produce a revision
+14. **Reviewer Audit**: simulate critical peer review and produce a revision
     matrix. Read `references/reviewer_audit.md` and use
     `templates/revision_matrix.md`.
-14. **Journal-Ready and LaTeX-Safe Audit**: check reporting guidelines,
+15. **Journal-Ready and LaTeX-Safe Audit**: check reporting guidelines,
     unsupported claims, citations, figures, labels, and manuscript readiness.
     Read `references/journal_checklist.md` and use
     `templates/journal_ready_audit.md`.
@@ -103,6 +108,8 @@ For a full from-materials workflow, produce these artifacts in order:
 - Project Intake
 - Source Inventory
 - Corpus Query Profile when field-style alignment is requested
+- Context-Aware Narrative Learning Library when the user asks to learn from
+  top-journal or high-impact writing logic
 - Term Bank, Phrase Pattern Bank, Journal Style Profile, and Language Guard when
   corpus materials are available
 - Motivation Lock
@@ -150,6 +157,32 @@ upstream inputs are assumed or missing.
 Keep the main response concise. Load only the reference files needed for the
 current user request.
 
+## Context-Aware Narrative Learning Defaults
+
+When building a long-term corpus for manuscript writing, prefer a two-layer
+corpus-to-narrative structure:
+
+```text
+corpus_workspace/
+  corpus_metadata.jsonl
+  high_impact_corpus_metadata.jsonl
+  term_bank.md
+  phrase_pattern_bank.md
+  journal_style_profile.md
+  language_guard.md
+  narrative_learning/
+    01_online_context_engine/
+    02_manuscript_specific_tools/
+    03_general_move_library/
+    legacy_first_pass/
+``` 
+
+The `01_online_context_engine` layer should classify source-use environment,
+evidence type, journal role, section function, and claim-strength context before
+any language pattern is adapted. This is especially important for non-native
+English scientific writing: the goal is to learn paragraph function and evidence
+logic, not to imitate sentences.
+
 ## Corpus Scripts
 
 Optional helper scripts live in `scripts/`:
@@ -164,3 +197,5 @@ Optional helper scripts live in `scripts/`:
 Use scripts when the user wants repeatable corpus updates. For a one-off writing
 request, it is acceptable to create the same artifacts manually from supplied
 papers or references.
+
+
